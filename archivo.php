@@ -9,9 +9,10 @@
 // // Save to root folder in website
 // file_put_contents('mypdf-1.pdf', $result);
 
-if(isset($_POST['enviar'])){
 
   // Set parameters
+  $nombre = $_POST['nombre'];
+  $formato = $_POST['outputFormat'];
   $apikey = '7cf679eb-74fe-4385-9a55-e5e5ad4603e7';
   $value = '<title>Test PDF conversion</title>Pero mas bien loquita'; // can aso be a url, starting with http..
 
@@ -29,21 +30,22 @@ if(isset($_POST['enviar'])){
 
   // Make the file a downloadable attachment - comment this out to show it directly inside the
   // web browser.  Note that you can give the file any name you want, e.g. alias-name.pdf below:
-  header('Content-Disposition: attachment; filename=' . 'alias-name.ppt' );
+  // Permite descargar un archivo de forma inmediata
+  header('Content-Disposition: attachment; filename=' . $nombre .'.' . $formato );
 
   // Stream PDF to user
-  // echo $result;
+  echo $result;
 
 
-  $value = 'http://www.google.com'; // can aso be an HTML string
+//   $value = 'http://www.google.com'; // can aso be an HTML string
+//
+// // Convert the HTML string to a PDF using those parameters.  Note if you have a very long HTML string in $value use POST rather than get.  See example #5
+// $result = file_get_contents("http://api.html2pdfrocket.com/pdf?apikey=" . urlencode($apikey) . "&value=" . urlencode($value) . "&OutputFormat=jpg");
+//
+// // Save to website folder - you can then stream to the user as a thumb or full size image
+// file_put_contents('my_image.jpg', $result);
 
-// Convert the HTML string to a PDF using those parameters.  Note if you have a very long HTML string in $value use POST rather than get.  See example #5
-$result = file_get_contents("http://api.html2pdfrocket.com/pdf?apikey=" . urlencode($apikey) . "&value=" . urlencode($value) . "&OutputFormat=jpg");
 
-// Save to website folder - you can then stream to the user as a thumb or full size image
-file_put_contents('my_image.jpg', $result);
-
-}
 
 
 
